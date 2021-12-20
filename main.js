@@ -23,71 +23,84 @@ var radioButtonSelection = document.querySelectorAll('input[name="message-type"]
 var shownMessageBox = document.querySelector('.shown-message-box');
 var meditateIcon = document.querySelector('.meditate-icon');
 var clearButton = document.querySelector('.clear');
-
-
-
-recieveMessageButton.addEventListener('click', function(){
-  getError();
-});
-
+var currentMessage = [];
+recieveMessageButton.addEventListener('click', getCurrentMessage);
+recieveMessageButton.addEventListener('click', getOutput);
 clearButton.addEventListener('click', clearMessage);
+clearButton.addEventListener('click', showIcon);
 
 function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length);
 };
 
 function hideIcon() {
-  meditateIcon.classList.toggle('hidden');
+  meditateIcon.style.visibility = 'hidden';
   }
 
+function showIcon() {
+  meditateIcon.style.visibility = 'visible';
+  shownMessageBox.innerHTML = "<img class='meditate-icon' src='./assets/meditate.svg' alt='meditate-icon'/>";
+}
+
 function showClearButton() {
-  clearButton.classList.toggle('hidden');
+  clearButton.classList.remove('hidden');
+}
+
+function hideClearButton() {
+  clearButton.classList.add('hidden');
 }
 
 function clearRadioSelection() {
   for (var i = 0; i < radioButtonSelection.length; i++) {
     if (radioButtonSelection[i].checked) {
-      radioButtonSelection[i].checked = false
+      radioButtonSelection[i].checked = false;
     }
   }
 }
 
 function clearMessage() {
-  shownMessageBox.innerText = '';
-  meditateIcon.classList.toggle('hidden');
+  clearCurrentMessage();
+  hideClearButton();
   clearRadioSelection();
 }
-// console.log(selection);
 
 function getSelection() {
   for (var i = 0; i < radioButtonSelection.length; i++) {
     if (radioButtonSelection[i].checked) {
-      var selection = radioButtonSelection[i].value
+      var selection = radioButtonSelection[i].value;
     }
   }
   return selection;
 }
 
-function getError() {
+function showCurrentMessage() {
+  shownMessageBox.innerText = `${currentMessage}`;
+}
+
+function getOutput() {
   if (!getSelection()) {
-    alert('Error, please select a message type');
+    alert('Error: please select a message type');
   }
   else {
-    doSomething();
+    showCurrentMessage();
   }
 }
 
-function doSomething () {
+function getCurrentMessage() {
   hideIcon();
   showClearButton();
   if (getSelection() === 'affirmation') {
-    var x = getRandomIndex(affirmations);
-    console.log(affirmations[x]);
-    shownMessageBox.innerText = `${affirmations[x]}`;
+    var randomAffirmationsIndex = getRandomIndex(affirmations);
+    currentMessage.push(affirmations[randomAffirmationsIndex]);
   }
   if (getSelection() === 'mantra') {
-    var y = getRandomIndex(mantras);
-    shownMessageBox.innerText = `${mantras[y]}`;
-    console.log(mantras[y]);
+    var randomMantrasIndex = getRandomIndex(mantras);
+    currentMessage.push(mantras[randomMantrasIndex]);
   }
+  return currentMessage;
+}
+
+function clearCurrentMessage() {
+  currentMessage = [];
+  showCurrentMessage();
 }
