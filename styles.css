@@ -10,26 +10,19 @@ body {
   background-size: 100% 100%;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
 }
 
 h1 {
   color: #ffffff;
-  display: flex;
-  justify-content: center;
   text-align: center;
   margin-bottom: 50px;
 }
 
-section {
-  margin-top: 50px;
-  justify-content: center;
-  align-items: center;
-}
-
 h3 {
   color: #ffffff;
-  display: flex;
-  justify-content: center;
+  text-align: center;
 }
 
 .input-box {
@@ -40,28 +33,27 @@ h3 {
   height: 100px;
   width: 500px;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: space-between;
 }
+
 fieldset {
   background: #ffffff;
   border: 0;
-}
-
-.input {
-  display: flex;
-  flex-direction: row;
-  /* justify-content: space-around; */
+  height: 50%;
+  width: 80%;
+  font-style: italic;
+  align-self: center;
 }
 
 button {
+  margin: 0;
   background: #134d71;
   color: #ffffff;
   border: 2px solid #134d71;
   border-radius: 5px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  height: 40px;
 }
 
 .shown-message-box {
@@ -70,7 +62,10 @@ button {
   border-radius: 5px;
   height: 200px;
   width: 700px;
+  font-size: 1.5em;
+  font-weight: bold;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
